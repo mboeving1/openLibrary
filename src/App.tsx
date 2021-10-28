@@ -1,12 +1,31 @@
-import React from 'react';
-
-import './App.css';
-import BookDetails from './components/BookDetails';
+import { stringify } from "querystring";
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import BookSearchForm from "./components/BookSearchForm";
+import { BookInterface } from "./models/BookDetailsInterface";
+import SearchParams from "./models/SearchParams";
+import getBooks from "./services/GetBooks";
 
 function App() {
+  // const [data, setData] = useState("");
+  // useEffect(() => {
+  //   fetch("http://openlibrary.org/search.json?author=tolkien")
+  //     .then((response) => response.json())
+  //     .then((data) => setData(data));
+
+  //   console.log(data);
+  // }, []);
+  const [BookSearchForm, setBookSearchForm] = useState<BookInterface>();
+
+  function onSubmit(searchParams: SearchParams): void {
+    getBooks(search).then((type) => {
+      setBookSearchForm(type);
+    });
+  }
   return (
     <div className="App">
-      <BookDetails/>
+      <h1>Hello</h1>
+      <BookSearchForm onSubmit={onSubmit} />
     </div>
   );
 }
