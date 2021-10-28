@@ -26,7 +26,6 @@ function App() {
     <div className="App">
       <h1>Hello</h1>
       <BookSearchForm onSubmit={onSubmit} />
-      <h2>random</h2>
     </div>
   );
 }
