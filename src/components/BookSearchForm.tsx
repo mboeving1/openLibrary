@@ -9,12 +9,13 @@ export default function BookSearchForm({
 }) {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
+  const [query, setQuery] = useState("");
 
   <div className="BookSearchForm">
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        onSubmit({ title, type });
+        onSubmit({ title, type, query });
       }}
     >
       <label className="label">Search by Title: </label>
