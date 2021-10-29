@@ -1,7 +1,7 @@
 import axios from "axios";
 import { DocsEntity } from "../models/BookDetailsInterface";
 
-export default function getBooks(): Promise<DocsEntity> {
+export default function getBooks(searchQuery: string): Promise<DocsEntity> {
   return axios
     .get("http://openlibrary.org/search.json?", {
       params: {
@@ -13,5 +13,3 @@ export default function getBooks(): Promise<DocsEntity> {
       return response.data;
     });
 }
-
-// http://openlibrary.org/search.json?q=the+lord+of+the+rings
