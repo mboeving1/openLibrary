@@ -1,6 +1,5 @@
 export interface BookInterface {
-  title: string;
-  type: string;
+  q: string;
 }
 
 export interface BookDetailInterface {
