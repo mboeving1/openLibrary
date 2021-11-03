@@ -7,19 +7,20 @@ export default function BookSearchForm({
 }: {
   onSubmit: (searchQuery: string) => void;
 }) {
-  const [bookQuery, setBookQuery] = useState("");
+  const [bookQuery, setBookQuery] = useState(""); //using useState to set bookQuery as an empty string by default
   return (
     <div className="BookSearchForm">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          onSubmit(bookQuery);
+          onSubmit(bookQuery); //calls onSubmit(seachQuery) using bookQuery as parameter which by default is an empty string
         }}
       >
         <input
           type="text"
           value={bookQuery}
           onChange={(e) => {
+            //changes from empty string to the target value
             setBookQuery(e.target.value);
           }}
         ></input>

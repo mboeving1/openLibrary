@@ -2,6 +2,13 @@ export interface BookInterface {
   q: string;
 }
 
+export interface BookEntity {
+  title: string;
+  author_name?: string[] | null;
+  isbn?: string[] | null;
+  cover_i?: number | null;
+}
+
 export interface BookDetailInterface {
   numFound: number;
   start: number;
