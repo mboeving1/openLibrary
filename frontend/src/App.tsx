@@ -6,6 +6,14 @@ import BookSearchForm from "./components/BookSearchForm";
 import { BookInterface } from "./models/BookDetailsInterface";
 import SearchParams from "./models/SearchParams";
 import getBooks from "./services/GetBooks";
+// import { Route, Routes } from "react-router";
+import {
+  Switch,
+  Route,
+  BrowserRouter as Router,
+  NavLink,
+  Link,
+} from "react-router-dom";
 
 function App() {
   // const [data, setData] = useState("");
