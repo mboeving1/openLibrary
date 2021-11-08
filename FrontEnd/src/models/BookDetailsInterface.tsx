@@ -7,6 +7,7 @@ export interface BookEntity {
   author_name?: string[] | null;
   isbn?: string[] | null;
   cover_i?: number | null;
+  key: string;
 }
 
 export interface BookDetailInterface {
