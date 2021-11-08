@@ -7,7 +7,7 @@ import {
   DocsEntity,
   BookEntity,
 } from "../models/BookDetailsInterface";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BookHit from "./BookHit";
 import {
   BrowserRouter as Router,
@@ -18,7 +18,6 @@ import {
 import FavoritesList from "./FavoritesList";
 import FavoritesProvider from "../context/FavoritesProvider";
 import BookDescriptions from "./BookDescriptions";
-import exact from "react-router";
 
 export default function BookList() {
   const [bookSearchResponse, setBookSearchResponse] =
@@ -26,7 +25,9 @@ export default function BookList() {
   function onSubmit(searchQuery: string): void {
     //using searchQuery as parameter
 
-    getBooks(searchQuery).then((data) => setBookSearchResponse(data)); //uses searchQuery bc it's the parameter of onSubmit
+    getBooks(searchQuery).then(
+      (data) => setBookSearchResponse(data) //uses searchQuery bc it's the parameter of onSubmit
+    );
   }
   return (
     <div>
@@ -52,19 +53,22 @@ export default function BookList() {
             <Route path="/books/favorites">
               <FavoritesList />
             </Route>
-            <Route exact path="/:key">
+            <Route path="/:bookKey">
               <BookDescriptions />
             </Route>
             <Route path="/">
               <BookSearchForm onSubmit={onSubmit} />
               {bookSearchResponse?.docs?.map((doc, index) => (
-                <BookHit
-                  author_name={doc.author_name}
-                  isbn={doc.isbn}
-                  title={doc.title}
-                  cover_i={doc.cover_i}
-                  key={doc.key}
-                />
+                <div key={index}>
+                  <BookHit
+                    author_name={doc.author_name}
+                    isbn={doc.isbn}
+                    title={doc.title}
+                    cover_i={doc.cover_i}
+                    bookKey={doc.key}
+                  />
+                  {doc.key}
+                </div>
               ))}
             </Route>
           </FavoritesProvider>

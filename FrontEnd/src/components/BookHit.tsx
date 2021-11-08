@@ -7,38 +7,46 @@ import { useState, useEffect } from "react";
 import getBooks from "../services/GetBooks";
 import { useContext } from "react";
 import { Favorites } from "../context/FavoritesProvider";
-import BookInfo from "../models/BookInfoInterface";
+import BookInfo, { BookDetails } from "../models/BookInfoInterface";
 import { Link } from "react-router-dom";
 import getBooksResponse from "../services/getBooksResponse";
 
 export default function BookHit(
-  { author_name, isbn, title, cover_i, key }: BookEntity,
-  { description }: BookInfo
+  { author_name, isbn, title, cover_i, bookKey }: any,
+  { description }: BookDetails
 ) {
-  // const id = `https://openlibrary.org/works/${key}/${title.replaceAll(
-  //   " ",
-  //   "_"
-  // )}`;
+  // const [data, setData] = useState("");
 
-  // const [details, setDetails] = useState<BookInfo>();
-
-  // const fetchedDetails = useEffect(() => {
-  //   getBooksResponse(key).then((description) => setDetails(description));
+  // useEffect(() => {
+  //   fetch("http://openlibrary.org/search.json?author=tolkien")
+  //     .then((response) => response.json())
+  //     .then((data) => setData(data));
   // }, []);
 
-  // console.log("this is the key:", { key });
+  const id = `https://openlibrary.org${bookKey}`;
+
+  const [details, setDetails] = useState<BookDetails>();
+
+  const fetchedDetails = useEffect(() => {
+    getBooksResponse("/works/23578LOW").then((data) => console.log(data));
+  }, []);
+
+  console.log("this is the key:", { bookKey });
   return (
     <div className="book">
-      <Link className="linkToDescription" to={key}>
+      <Link
+        className="linkToDescription"
+        to={`https://openlibrary.org${bookKey}`}
+      >
         <h1>{title}</h1>
       </Link>
-      <h1>{key}</h1>
       <img src={`https://covers.openlibrary.org/b/id/ ${cover_i} -L.jpg`} />
       <h2>{author_name}</h2>
-      {/* <h3>
+
+      <h3>
         source: <a href={id}>{id}</a>
-      </h3> */}
-      {/* <p>{key}</p> */}
+      </h3>
+      <h1>{bookKey}</h1>
     </div>
   );
 }
