@@ -9,7 +9,7 @@ export default function BookSearchForm({
   onSubmit: (searchQuery: string) => void;
 }) {
   const [bookQuery, setBookQuery] = useState(""); //using useState to set bookQuery as an empty string by default
-  const [searchOptions, setSearchOptions] = useState("");
+  // const [searchOptions, setSearchOptions] = useState("");
 
   return (
     <div className="BookSearchForm">
@@ -28,7 +28,7 @@ export default function BookSearchForm({
             setBookQuery(e.target.value);
           }}
         ></input>
-        <label htmlFor="SearchOptions">
+        {/* <label htmlFor="SearchOptions">
           <select
             id="SearchOptions"
             name="SearchOptions"
@@ -42,7 +42,7 @@ export default function BookSearchForm({
             <option value="author_name">Author</option>
             <option value="subject">Subject</option>
           </select>
-        </label>
+        </label> */}
       </form>
     </div>
   );

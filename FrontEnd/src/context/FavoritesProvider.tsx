@@ -4,11 +4,12 @@ import {
   BookDetailInterface,
   DocsEntity,
 } from "../models/BookDetailsInterface";
+import { BookDetails } from "../models/BookInfoInterface";
 
 interface FavoritesProps {
-  addToFavorites: (recipe: DocsEntity) => void;
+  addToFavorites: (book: BookDetails) => void;
   removeFromFavorites: (key: string) => void;
-  favoritesList: DocsEntity[];
+  favoritesList: BookDetails[];
 }
 
 const defaultValues: FavoritesProps = {
@@ -24,8 +25,8 @@ export default function FavoritesProvider({
 }: {
   children: ReactNode;
 }) {
-  const [favoritesList, setFavoritesList] = useState<DocsEntity[]>([]);
-  function addToFavorites(book: DocsEntity): void {
+  const [favoritesList, setFavoritesList] = useState<BookDetails[]>([]);
+  function addToFavorites(book: BookDetails): void {
     console.log("this is the book", book);
     //copy then modify
     let newFavoritesList = [...favoritesList];
