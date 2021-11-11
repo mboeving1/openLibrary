@@ -4,11 +4,12 @@ import {
   BookDetailInterface,
   DocsEntity,
 } from "../models/BookDetailsInterface";
+import { BookISBNInterface } from "../models/BookISBNInterface";
 
 interface FavoritesProps {
-  addToFavorites: (recipe: DocsEntity) => void;
+  addToFavorites: (book: BookISBNInterface) => void;
   removeFromFavorites: (key: string) => void;
-  favoritesList: DocsEntity[];
+  favoritesList: BookISBNInterface[];
 }
 
 const defaultValues: FavoritesProps = {
@@ -24,8 +25,8 @@ export default function FavoritesProvider({
 }: {
   children: ReactNode;
 }) {
-  const [favoritesList, setFavoritesList] = useState<DocsEntity[]>([]);
-  function addToFavorites(book: DocsEntity): void {
+  const [favoritesList, setFavoritesList] = useState<BookISBNInterface[]>([]);
+  function addToFavorites(book: BookISBNInterface): void {
     console.log("this is the book", book);
     //copy then modify
     let newFavoritesList = [...favoritesList];
@@ -37,7 +38,9 @@ export default function FavoritesProvider({
   function removeFromFavorites(key: string): void {
     //copy then modify
     let newFavoritesList = [...favoritesList];
-    let foundIndex = newFavoritesList.findIndex((book) => book.key == key);
+    let foundIndex = newFavoritesList.findIndex(
+      (book) => book.ISBN.bib_key == key
+    );
     newFavoritesList.splice(foundIndex, 1);
     setFavoritesList(newFavoritesList);
   }

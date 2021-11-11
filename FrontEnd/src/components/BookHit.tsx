@@ -7,14 +7,18 @@ import { useState, useEffect } from "react";
 import getBooks from "../services/GetBooks";
 import { useContext } from "react";
 import { Favorites } from "../context/FavoritesProvider";
-import BookInfo, { BookDetails } from "../models/BookInfoInterface";
 import { Link } from "react-router-dom";
 import getBooksResponse from "../services/getBooksResponse";
+import BookDescriptions from "./BookDescriptions";
+import { BookISBNInterface } from "../models/BookISBNInterface";
 
-export default function BookHit(
-  { author_name, isbn, title, cover_i, bookKey }: any,
-  { description }: BookDetails
-) {
+export default function BookHit({
+  author_name,
+  isbn,
+  title,
+  cover_i,
+  bookKey,
+}: any) {
   // const [data, setData] = useState("");
 
   // useEffect(() => {
@@ -25,10 +29,12 @@ export default function BookHit(
 
   const id = `https://openlibrary.org${bookKey}`;
 
-  const [details, setDetails] = useState<BookDetails>();
+  const targetISBN = isbn?.[0];
+
+  const [descriptions, setDescriptions] = useState<BookISBNInterface>();
 
   const fetchedDetails = useEffect(() => {
-    getBooksResponse("/works/23578LOW").then((data) => console.log(data));
+    getBooks(bookKey).then((data) => console.log(data));
   }, []);
 
   console.log("this is the key:", { bookKey });
@@ -36,17 +42,18 @@ export default function BookHit(
     <div className="book">
       <Link
         className="linkToDescription"
-        to={`https://openlibrary.org${bookKey}`}
+        to="/books/details"
+
+        // to="/description"
       >
         <h1>{title}</h1>
       </Link>
-      <img src={`https://covers.openlibrary.org/b/id/ ${cover_i} -L.jpg`} />
-      <h2>{author_name}</h2>
-
+      <img src={`https://covers.openlibrary.org/b/id/ ${cover_i} -M.jpg`} />
+      <h2>{author_name}</h2>`
       <h3>
         source: <a href={id}>{id}</a>
       </h3>
-      <h1>{bookKey}</h1>
+      <p>{isbn?.[0]}</p>
     </div>
   );
 }
