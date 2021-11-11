@@ -5,8 +5,7 @@ import {
 } from "../models/BookDetailsInterface";
 import SearchParams from "../models/SearchParams";
 import WorkDetails from "../models/WorkDetails";
-import BookInfo from "../models/BookInfoInterface";
-import { BookDetails } from "../models/BookInfoInterface";
+import { BookISBNInterface } from "../models/BookISBNInterface";
 
 //searchQuery is being used here bc whatever is being put into getBooks goes into the end of the url
 // export default function getBooksResponse(
@@ -25,16 +24,21 @@ import { BookDetails } from "../models/BookInfoInterface";
 // }
 
 export default function getBooksResponse(
-  isbn?: string[]
-): Promise<BookDetailInterface> {
+  ISBN: string
+): Promise<BookISBNInterface> {
+  console.log("this is the description console", ISBN);
   return axios
-    .get("https://openlibrary.org/api/books?bibkeys=ISBN:0451526538", {
-      params: {
-        isbn, //this the parameter of getBooks() - adds onto the url so that it can retrieve the specific search
-      },
-    })
+    .get(
+      `https://openlibrary.org/api/books?bibkeys=ISBN:${ISBN}&jscmd=data&format=json`,
+      {
+        params: {
+          //this the parameter of getBooks() - adds onto the url so that it can retrieve the specific search
+        },
+      }
+    )
     .then((response) => {
       console.log(response.data);
+      // console.log("this is the description console", ISBN);
       return response.data;
     });
 }
