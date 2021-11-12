@@ -38,7 +38,7 @@ export default function getBooksResponse(
     )
     .then((response) => {
       console.log(response.data);
-      // console.log("this is the description console", ISBN);
+      console.log("this is the description console", ISBN);
       return response.data;
     });
 }
