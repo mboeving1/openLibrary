@@ -19,6 +19,7 @@ import FavoritesList from "./FavoritesList";
 import FavoritesProvider from "../context/FavoritesProvider";
 import BookDescriptions from "./BookDescriptions";
 import getBooksResponse from "../services/getBooksResponse";
+import { BookISBNInterface } from "../models/BookISBNInterface";
 
 export default function BookList() {
   const [bookSearchResponse, setBookSearchResponse] =
@@ -30,6 +31,16 @@ export default function BookList() {
       (data) => setBookSearchResponse(data) //uses searchQuery bc it's the parameter of onSubmit
     );
   }
+
+  //   const [details, setDetails] = useState<BookISBNInterface>();
+
+  //   useEffect(() => {
+  //     BookDescriptions().then((response) => {
+  //       console.log(response.description)
+  //       setDetails(response.description);
+  //   })
+  // })
+
   return (
     <div>
       <Router>
@@ -65,7 +76,10 @@ export default function BookList() {
             <Route path="/books/favorites" exact>
               <FavoritesList />
             </Route>
-            <Route path="/books/details">
+            <Route path="/books/details/:targetISBN">
+              {/* <BookDescriptions description={BookDescriptions?.toString()} ISBN={BookDescriptions?.ISBN.bib_key} details={BookDescriptions?.toString()}/>
+            > */}
+              {/* <BookDescriptions element={<}/> */}
               <BookDescriptions />
             </Route>
             <Route exact path="/">

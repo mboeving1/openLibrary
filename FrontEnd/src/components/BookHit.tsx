@@ -3,7 +3,7 @@ import {
   BookEntity,
   BookDetailInterface,
 } from "../models/BookDetailsInterface";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Props } from "react";
 import getBooks from "../services/GetBooks";
 import { useContext } from "react";
 import { Favorites } from "../context/FavoritesProvider";
@@ -40,12 +40,7 @@ export default function BookHit({
   console.log("this is the key:", { bookKey });
   return (
     <div className="book">
-      <Link
-        className="linkToDescription"
-        to="/books/details"
-
-        // to="/description"
-      >
+      <Link className="linkToDescription" to={`/books/details/${targetISBN}`}>
         <h1>{title}</h1>
       </Link>
       <img src={`https://covers.openlibrary.org/b/id/ ${cover_i} -M.jpg`} />
@@ -53,7 +48,15 @@ export default function BookHit({
       <h3>
         source: <a href={id}>{id}</a>
       </h3>
-      <p>{isbn?.[0]}</p>
+      <button
+        onClick={() => {
+          return <BookDescriptions />;
+        }}
+      >
+        {" "}
+        Description{" "}
+      </button>
+      <p>{targetISBN}</p>
     </div>
   );
 }
