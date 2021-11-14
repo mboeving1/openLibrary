@@ -16,7 +16,7 @@ import {
   NavLink,
 } from "react-router-dom";
 import FavoritesList from "./FavoritesList";
-import FavoritesProvider from "../context/FavoritesProvider";
+// import FavoritesProvider from "../context/FavoritesProvider";
 import BookDescriptions from "./BookDescriptions";
 import getBooksResponse from "../services/getBooksResponse";
 import { BookISBNInterface } from "../models/BookISBNInterface";
@@ -31,15 +31,6 @@ export default function BookList() {
       (data) => setBookSearchResponse(data) //uses searchQuery bc it's the parameter of onSubmit
     );
   }
-
-  //   const [details, setDetails] = useState<BookISBNInterface>();
-
-  //   useEffect(() => {
-  //     BookDescriptions().then((response) => {
-  //       console.log(response.description)
-  //       setDetails(response.description);
-  //   })
-  // })
 
   return (
     <div>
@@ -72,32 +63,32 @@ export default function BookList() {
         Get axios Response
       </button> */}
         <Switch>
-          <FavoritesProvider>
-            <Route path="/books/favorites" exact>
-              <FavoritesList />
-            </Route>
-            <Route path="/books/details/:targetISBN">
-              {/* <BookDescriptions description={BookDescriptions?.toString()} ISBN={BookDescriptions?.ISBN.bib_key} details={BookDescriptions?.toString()}/>
+          {/* <FavoritesProvider> */}
+          <Route path="/books/favorites" exact>
+            <FavoritesList />
+          </Route>
+          <Route path="/books/details/:targetISBN">
+            {/* <BookDescriptions description={BookDescriptions?.toString()} ISBN={BookDescriptions?.ISBN.bib_key} details={BookDescriptions?.toString()}/>
             > */}
-              {/* <BookDescriptions element={<}/> */}
-              <BookDescriptions />
-            </Route>
-            <Route exact path="/">
-              <BookSearchForm onSubmit={onSubmit} />
-              {bookSearchResponse?.docs?.map((doc, index) => (
-                <div key={index}>
-                  <BookHit
-                    author_name={doc.author_name}
-                    isbn={doc.isbn}
-                    title={doc.title}
-                    cover_i={doc.cover_i}
-                    bookKey={doc.key}
-                  />
-                  {/* {doc.key} */}
-                </div>
-              ))}
-            </Route>
-          </FavoritesProvider>
+            {/* <BookDescriptions element={<}/> */}
+            <BookDescriptions />
+          </Route>
+          <Route exact path="/">
+            <BookSearchForm onSubmit={onSubmit} />
+            {bookSearchResponse?.docs?.map((doc, index) => (
+              <div key={index}>
+                <BookHit
+                  author_name={doc.author_name}
+                  isbn={doc.isbn}
+                  title={doc.title}
+                  cover_i={doc.cover_i}
+                  bookKey={doc.key}
+                />
+                {/* {doc.key} */}
+              </div>
+            ))}
+          </Route>
+          {/* </FavoritesProvider> */}
         </Switch>
         {/* the getBooks() just console logs, doesn't save it anywhere */}
 

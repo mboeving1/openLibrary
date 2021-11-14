@@ -1,7 +1,11 @@
 export interface BookISBNInterface {
-  ISBN: ISBN;
-  details: Details;
+  bib_key: string;
   description: string;
+  covers?: number[] | null;
+  authors?: AuthorsEntity[] | null;
+  title: string;
+  ISBN: ISBN[];
+  details: Details;
 }
 export interface ISBN {
   bib_key: string;
@@ -10,8 +14,13 @@ export interface ISBN {
   preview_url: string;
   thumbnail_url: string;
   details: Details;
+  description: string;
+  authors?: AuthorsEntity[] | null;
+  covers?: number[] | null;
+  title: string;
 }
 export interface Details {
+  ISBN: ISBN[];
   other_titles?: string[] | null;
   publishers?: string[] | null;
   number_of_pages: number;

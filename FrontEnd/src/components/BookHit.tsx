@@ -3,7 +3,7 @@ import {
   BookEntity,
   BookDetailInterface,
 } from "../models/BookDetailsInterface";
-import { useState, useEffect, Props } from "react";
+import { useState, useEffect } from "react";
 import getBooks from "../services/GetBooks";
 import { useContext } from "react";
 import { Favorites } from "../context/FavoritesProvider";
@@ -18,7 +18,13 @@ export default function BookHit({
   title,
   cover_i,
   bookKey,
-}: any) {
+}: {
+  title: string;
+  author_name?: string[] | null;
+  isbn?: string[] | null;
+  cover_i?: number | null;
+  bookKey: string;
+}) {
   // const [data, setData] = useState("");
 
   // useEffect(() => {
@@ -48,14 +54,6 @@ export default function BookHit({
       <h3>
         source: <a href={id}>{id}</a>
       </h3>
-      <button
-        onClick={() => {
-          return <BookDescriptions />;
-        }}
-      >
-        {" "}
-        Description{" "}
-      </button>
       <p>{targetISBN}</p>
     </div>
   );
