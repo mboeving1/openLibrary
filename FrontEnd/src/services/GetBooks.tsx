@@ -16,8 +16,7 @@ export default function getBooks(
       },
     })
     .then((response) => {
-      console.log(response.data.docs[1].isbn);
+      console.log(response.data);
       return response.data;
-      let targetISBN = response.data.docs[1].isbn;
     });
 }
