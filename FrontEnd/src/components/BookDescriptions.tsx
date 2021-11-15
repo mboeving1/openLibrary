@@ -19,6 +19,7 @@ import axios from "axios";
 import getBooks from "../services/GetBooks";
 import getWorksAPI from "../services/getWorks";
 import WorkAPI from "../models/WorkDetails";
+import "./BookDescriptions.css";
 
 export default function BookDescriptions() {
   //   {
@@ -125,28 +126,21 @@ export default function BookDescriptions() {
         {" "}
         test{" "}
       </button>
-      {/* <h1>{getData?.authors}</h1> */}
 
       <h1>{test && test[targetISBN].details.title}</h1>
       <img src="https://covers.openlibrary.org/b/id/8483863-L.jpg"></img>
-      <h1>{test && test[targetISBN].details.authors[0].name}</h1>
-      <h1>{test && test[targetISBN].details.description}</h1>
-      {stuff && <p>{stuff.description}</p>}
+      <h2>{test && test[targetISBN].details.authors[0].name}</h2>
+
+      <div className="descriptionParagraph">
+        {stuff && <p>{stuff.description}</p>}
+      </div>
       {/* <h2>{shopping?.docs.id_amazon}</h2> */}
-      {/* <h1>{test!.details[3]}</h1> */}
-      {/* <h2> {targetISBN}</h2> */}
       <img
       // src={`https://covers.openlibrary.org/b/id/ ${details?.covers} -L.jpg`}
       />
-      <p>{/* source: <a href={id}></a> */}</p>
-      {/* {console.log("details are: ", getData)} */}
-      <p>ISBN: {targetISBN}</p>
-      {/* <h1>{props.description}</h1> */}
-      {/* <ul>
-        {details?.recipe.ingredientLines?.map((ingredient, index) => (
-          <li key={index}>{ingredient}</li>
-        ))}
-      </ul> */}
+
+      {/* <p>ISBN: {targetISBN}</p> */}
+
       {/* {details?.description} */}
       {/* {thisBookIsAFavorite ? (
         <button

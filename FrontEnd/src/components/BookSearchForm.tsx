@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BookEntity, BookInterface } from "../models/BookDetailsInterface";
 import SearchParams from "../models/SearchParams";
 import BookHit from "./BookHit";
+import "./BookSearchForm.css";
 
 export default function BookSearchForm({
   onSubmit,
@@ -21,6 +22,7 @@ export default function BookSearchForm({
       >
         <label>Search</label>
         <input
+          className="BookSearchForm"
           type="text"
           value={bookQuery}
           onChange={(e) => {

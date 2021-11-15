@@ -7,6 +7,7 @@ import { BookInterface } from "./models/BookDetailsInterface";
 import SearchParams from "./models/SearchParams";
 import getBooks from "./services/GetBooks";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./components/BookHit.css";
 
 function App() {
   // const [data, setData] = useState("");
@@ -26,7 +27,11 @@ function App() {
   // }
   return (
     <div className="App">
-      <BookList />
+      <div className="header">
+        <div>
+          <BookList />
+        </div>
+      </div>
     </div>
   );
 }

@@ -12,6 +12,7 @@ import getBooksResponse from "../services/getBooksResponse";
 import BookDescriptions from "./BookDescriptions";
 import { BookISBNInterface } from "../models/BookISBNInterface";
 import { useParams } from "react-router";
+import "./BookHit.css";
 
 export default function BookHit({
   author_name,
@@ -52,7 +53,7 @@ export default function BookHit({
 
   console.log("this is the key:", { bookKey });
   return (
-    <div className="book">
+    <div className="BookHit">
       <Link
         className="linkToDescription"
         to={`/books/details/${targetISBN}${bookKey}/${id_amazon}`}

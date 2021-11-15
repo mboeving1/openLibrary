@@ -22,6 +22,8 @@ import getBooksResponse from "../services/getBooksResponse";
 import { BookISBNInterface } from "../models/BookISBNInterface";
 import "./BookList.css";
 import { domainToASCII } from "url";
+import "./BookList.css";
+import "./BookHit.css";
 
 export default function BookList() {
   const [bookSearchResponse, setBookSearchResponse] =
@@ -37,7 +39,32 @@ export default function BookList() {
   return (
     <div>
       <Router>
-        <div className="header">
+        <div className="container">
+          <div className="titleDiv">
+            <h1 className="title">BookDrive</h1>
+          </div>
+          <Route exact path="/">
+            <BookSearchForm onSubmit={onSubmit} />
+            <div className="result">
+              {bookSearchResponse?.docs?.map((doc, index) => {
+                if (doc.id_amazon) {
+                  console.log("good reads console", doc.id_amazon[0]);
+                  return (
+                    <div key={index}>
+                      <BookHit
+                        author_name={doc.author_name}
+                        isbn={doc.isbn}
+                        title={doc.title}
+                        cover_i={doc.cover_i}
+                        bookKey={doc.key}
+                      />
+                      {/* {doc.key} */}
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </Route>
           <NavLink className="home" to="/">
             Home
           </NavLink>
@@ -53,9 +80,6 @@ export default function BookList() {
               <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
             </svg>
           </NavLink>
-          <div className="titleDiv">
-            <h1 className="title">Search the Library</h1>
-          </div>
         </div>
         {/* <button
         onClick={() => {
@@ -75,27 +99,7 @@ export default function BookList() {
             {/* <BookDescriptions element={<}/> */}
             <BookDescriptions />
           </Route>
-          <Route exact path="/">
-            <BookSearchForm onSubmit={onSubmit} />
 
-            {bookSearchResponse?.docs?.map((doc, index) => {
-              if (doc.id_amazon) {
-                console.log("good reads console", doc.id_amazon[0]);
-                return (
-                  <div key={index}>
-                    <BookHit
-                      author_name={doc.author_name}
-                      isbn={doc.isbn}
-                      title={doc.title}
-                      cover_i={doc.cover_i}
-                      bookKey={doc.key}
-                    />
-                    {/* {doc.key} */}
-                  </div>
-                );
-              }
-            })}
-          </Route>
           {/* </FavoritesProvider> */}
         </Switch>
         {/* the getBooks() just console logs, doesn't save it anywhere */}
