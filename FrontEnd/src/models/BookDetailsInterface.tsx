@@ -14,7 +14,7 @@ export interface BookDetailInterface {
   numFound: number;
   start: number;
   numFoundExact: boolean;
-  docs?: DocsEntity[] | null;
+  docs: DocsEntity[];
   num_found: number;
   q: string;
   offset?: null;
@@ -60,7 +60,7 @@ export interface DocsEntity {
   subject?: string[] | null;
   time?: string[] | null;
   id_alibris_id?: string[] | null;
-  id_amazon?: string[] | null;
+  id_amazon: string[];
   id_bcid?: string[] | null;
   id_depósito_legal?: string[] | null;
   id_dnb?: string[] | null;

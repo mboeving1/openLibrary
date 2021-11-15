@@ -1,23 +1,27 @@
-export default interface WorkDetails {
-  created: CreatedOrDescriptionOrLastModified;
-  subjects?: string[] | null;
-  latest_revision: number;
-  description: CreatedOrDescriptionOrLastModified;
-  key: string;
+export default interface WorkAPI {
+  description: string;
   title: string;
+  covers?: number[] | null;
+  subject_places?: string[] | null;
+  subjects?: string[] | null;
+  subject_people?: string[] | null;
+  key: string;
   authors?: AuthorsEntity[] | null;
-  type: TypeOrAuthor;
-  last_modified: CreatedOrDescriptionOrLastModified;
+  subject_times?: string[] | null;
+  type: AuthorOrType;
+  latest_revision: number;
   revision: number;
-}
-export interface CreatedOrDescriptionOrLastModified {
-  type: string;
-  value: string;
+  created: CreatedOrLastModified;
+  last_modified: CreatedOrLastModified;
 }
 export interface AuthorsEntity {
-  type: TypeOrAuthor;
-  author: TypeOrAuthor;
+  author: AuthorOrType;
+  type: AuthorOrType;
 }
-export interface TypeOrAuthor {
+export interface AuthorOrType {
   key: string;
+}
+export interface CreatedOrLastModified {
+  type: string;
+  value: string;
 }
