@@ -1,0 +1,6 @@
+.BookHit{
+    display: block;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 2px solid black;
+}
