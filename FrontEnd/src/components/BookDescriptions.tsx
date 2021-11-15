@@ -5,14 +5,20 @@ import {
   Details,
   ISBN,
   AuthorsEntity,
+  Identifiers,
 } from "../models/BookISBNInterface";
 import { Favorites } from "../context/FavoritesProvider";
 import getBooksResponse from "../services/getBooksResponse";
 import { useContext } from "react";
-import { DocsEntity } from "../models/BookDetailsInterface";
+import {
+  BookDetailInterface,
+  DocsEntity,
+} from "../models/BookDetailsInterface";
 import BookHit from "./BookHit";
 import axios from "axios";
 import getBooks from "../services/GetBooks";
+import getWorksAPI from "../services/getWorks";
+import WorkAPI from "../models/WorkDetails";
 
 export default function BookDescriptions() {
   //   {
@@ -23,7 +29,7 @@ export default function BookDescriptions() {
   //   covers,
   //   title,
   //   authors,
-  //   description,
+  // description,
   //   details,
   //   bib_key,
   // }: {
@@ -49,6 +55,12 @@ export default function BookDescriptions() {
   //   getBooksResponse(targetISBN).then((data) => setDetails(data));
   // }, []);
   const { targetISBN } = useParams<any>();
+
+  let { bookKey } = useParams<any>();
+  bookKey = "/works/" + bookKey;
+
+  const { id_amazon } = useParams<any>();
+
   // const { bib_key, description, covers, authors, title, ISBN } =
   //   useParams<any>();
 
@@ -70,29 +82,57 @@ export default function BookDescriptions() {
   // }, []);
 
   const [test, setTest] = useState<any>();
+  const [shopping, setShopping] = useState<BookDetailInterface>();
 
   const fetchedDetails = useEffect(() => {
     getBooksResponse(targetISBN).then((data) => {
       setTest(data);
       setDescriptions(data.details);
     });
+    getBooks(id_amazon).then((data) => {
+      setShopping(data);
+      // console.log("this is amazon id", id_amazon);
+      console.log("this is amazon info:", id_amazon[0]);
+    });
   }, []);
+
+  const [description, setDescription] = useState<any>();
+
+  const [stuff, setStuff] = useState<WorkAPI>();
+
+  const moreDetails = useEffect(() => {
+    getWorksAPI(bookKey).then((data) => {
+      console.log("workAPI data", data.description);
+      console.log("this is bookKey", bookKey);
+      setStuff(data);
+    });
+  }, []);
+
   const getData = targetISBN[0].details;
+
+  const amazon = id_amazon[0];
 
   return (
     <div className="detailsPage">
       <button
         onClick={() => {
           console.log(test);
-          console.log(targetISBN);
+          console.log("this is the targetISBN", targetISBN);
           console.log(test && test[targetISBN]);
+          console.log("this is stuff", stuff);
         }}
       >
         {" "}
         test{" "}
       </button>
       {/* <h1>{getData?.authors}</h1> */}
-      <h1>{test[targetISBN]}</h1>
+
+      <h1>{test && test[targetISBN].details.title}</h1>
+      <img src="https://covers.openlibrary.org/b/id/8483863-L.jpg"></img>
+      <h1>{test && test[targetISBN].details.authors[0].name}</h1>
+      <h1>{test && test[targetISBN].details.description}</h1>
+      {stuff && <p>{stuff.description}</p>}
+      {/* <h2>{shopping?.docs.id_amazon}</h2> */}
       {/* <h1>{test!.details[3]}</h1> */}
       {/* <h2> {targetISBN}</h2> */}
       <img
