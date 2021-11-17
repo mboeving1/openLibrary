@@ -8,6 +8,7 @@ import SearchParams from "../models/SearchParams";
 //searchQuery is being used here bc whatever is being put into getBooks goes into the end of the url
 export default function getBooks(
   searchQuery: string
+  // id_amazon: string
 ): Promise<BookDetailInterface> {
   return axios
     .get("http://openlibrary.org/search.json?", {

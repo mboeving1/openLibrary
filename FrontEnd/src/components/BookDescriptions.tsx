@@ -20,6 +20,8 @@ import getBooks from "../services/GetBooks";
 import getWorksAPI from "../services/getWorks";
 import WorkAPI from "../models/WorkDetails";
 import "./BookDescriptions.css";
+import { render } from "@testing-library/react";
+import { Link, NavLink } from "react-router-dom";
 
 export default function BookDescriptions() {
   //   {
@@ -60,17 +62,10 @@ export default function BookDescriptions() {
   let { bookKey } = useParams<any>();
   bookKey = "/works/" + bookKey;
 
-  const { id_amazon } = useParams<any>();
+  const { amazon } = useParams<any>();
 
   // const { bib_key, description, covers, authors, title, ISBN } =
   //   useParams<any>();
-
-  // const { addToFavorites, removeFromFavorites, favoritesList } =
-  //   useContext(Favorites);
-
-  // const thisBookIsAFavorite: boolean = favoritesList.some(
-  //   (favorite) => favorite.ISBN.bib_key == details?.ISBN.bib_key
-  // );
 
   const [descriptions, setDescriptions] = useState<Details>();
 
@@ -90,10 +85,10 @@ export default function BookDescriptions() {
       setTest(data);
       setDescriptions(data.details);
     });
-    getBooks(id_amazon).then((data) => {
+    getBooks(bookKey).then((data) => {
       setShopping(data);
       // console.log("this is amazon id", id_amazon);
-      console.log("this is amazon info:", id_amazon[0]);
+      // console.log("this is amazon info:", id_amazon[0]);
     });
   }, []);
 
@@ -111,7 +106,11 @@ export default function BookDescriptions() {
 
   const getData = targetISBN[0].details;
 
-  const amazon = id_amazon[0];
+  const [active, setActive] = useState(false);
+
+  const ToggleClass = () => {
+    setActive(true);
+  };
 
   return (
     <div className="detailsPage">
@@ -126,44 +125,41 @@ export default function BookDescriptions() {
         {" "}
         test{" "}
       </button>
-
       <h1>{test && test[targetISBN].details.title}</h1>
       <img src="https://covers.openlibrary.org/b/id/8483863-L.jpg"></img>
-      <h2>{test && test[targetISBN].details.authors[0].name}</h2>
-
+      {/* <h2>{test && test[targetISBN].details.authors[0].name}</h2> */}
       <div className="descriptionParagraph">
         {stuff && <p>{stuff.description}</p>}
       </div>
+      <h1>{amazon}</h1>
       {/* <h2>{shopping?.docs.id_amazon}</h2> */}
       <img
       // src={`https://covers.openlibrary.org/b/id/ ${details?.covers} -L.jpg`}
       />
-
       {/* <p>ISBN: {targetISBN}</p> */}
-
-      {/* {details?.description} */}
-      {/* {thisBookIsAFavorite ? (
-        <button
-          className="detailsPageRemoveButton"
-          onClick={() => {
-            removeFromFavorites(details?.!);
-          }}
-        >
-          Remove Favorite
-        </button>
-      ) : (
-        <button
-          className="detailsPageFavoritesButton"
-          onClick={() => {
-            console.log(details);
-            if (details) {
-              // addToFavorites(details);
-            }
-          }}
-        >
-          Add to Favorites
-        </button>
-      )} */}
+      <button onClick={ToggleClass}>Leave a Review!</button>
+      <div className={active ? "true" : "false"}>
+        <form className="reviewForm">
+          <h3>Leave a Review </h3>
+          <label>Name:</label>
+          <input type="text"></input>
+          <br />
+          <textarea></textarea>
+          <button type="submit">submit</button>
+        </form>
+      </div>
+      );
+      <Link
+        to={{
+          pathname: `https://www.amazon.com/Harry-Potter-Sorcerers-Stone-Book/dp/${amazon}/ref=sr_1_2?keywords=${amazon}&qid=1637111936&qsid=146-0603343-4241928&sr=8-2&sres=${amazon}&srpt=ABIS_BOOK`,
+        }}
+        target="_blank"
+      >
+        <h1>this is the amazon link</h1>
+      </Link>
+      {/* <button onClick={() => {
+        <a = {`https://www.amazon.com/s?k=${amazon}&ref=nb_sb_noss`}
+      }} */}
     </div>
   );
 }

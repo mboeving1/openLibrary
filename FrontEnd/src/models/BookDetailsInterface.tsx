@@ -8,6 +8,7 @@ export interface BookEntity {
   isbn?: string[] | null;
   cover_i?: number | null;
   key: string;
+  id_amazon: string[];
 }
 
 export interface BookDetailInterface {
@@ -60,7 +61,7 @@ export interface DocsEntity {
   subject?: string[] | null;
   time?: string[] | null;
   id_alibris_id?: string[] | null;
-  id_amazon: string[];
+  id_amazon: string;
   id_bcid?: string[] | null;
   id_depósito_legal?: string[] | null;
   id_dnb?: string[] | null;

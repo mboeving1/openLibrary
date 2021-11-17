@@ -13,16 +13,34 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.home {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 10px;
+}
+
 .container h1 {
   margin: 0;
   font-size: 5vw;
 }
 
-.Result {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: 50%;
+.result {
+  height: 150px;
+  width: 100%;
+
+  /* max-width: 30%; */
   position: absolute;
   margin-top: 100px;
+}
+
+.result {
+  display: flex;
+  /* flex-wrap: wrap;
+  flex-direction: row; */
+  flex-wrap: wrap;
+  /* justify-content: space-around; */
+  margin-left: 40px;
+  margin-right: 40px;
 }

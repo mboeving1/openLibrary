@@ -7,17 +7,19 @@ import "./BookSearchForm.css";
 export default function BookSearchForm({
   onSubmit,
 }: {
-  onSubmit: (searchQuery: string) => void;
+  onSubmit: (searchQuery: string, id_amazon: string) => void;
 }) {
   const [bookQuery, setBookQuery] = useState(""); //using useState to set bookQuery as an empty string by default
   // const [searchOptions, setSearchOptions] = useState("");
+
+  const [amazon, setAmazon] = useState("");
 
   return (
     <div className="BookSearchForm">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          onSubmit(bookQuery); //calls onSubmit(seachQuery) using bookQuery as parameter which by default is an empty string
+          onSubmit(bookQuery, amazon[0]); //calls onSubmit(seachQuery) using bookQuery as parameter which by default is an empty string
         }}
       >
         <label>Search</label>
@@ -45,6 +47,7 @@ export default function BookSearchForm({
             <option value="subject">Subject</option>
           </select>
         </label> */}
+        {console.log("this is amazon", amazon)};
       </form>
     </div>
   );
