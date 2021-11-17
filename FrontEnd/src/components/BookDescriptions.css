@@ -1,0 +1,11 @@
+.descriptionParagraph {
+  display: flex;
+  flex-direction: column;
+  margin-left: 270px;
+  margin-right: 270px;
+  line-height: 1.5;
+}
+
+.false {
+  display: none;
+}

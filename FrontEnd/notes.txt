@@ -1,0 +1,50 @@
+{bib_key: '0807286001', info_url: "https://openlibrary.org/books/OL26820966M/Harry_Potter_and_the_Sorcerer's_Stone", preview: 'noview', preview_url: "https://openlibrary.org/books/OL26820966M/Harry_Potter_and_the_Sorcerer's_Stone", thumbnail_url: 'https://covers.openlibrary.org/b/id/8483863-S.jpg', …}
+bib_key: "0807286001"
+details:
+authors: [{…}]
+covers: [8483863]
+created: {type: '/type/datetime', value: '2019-03-29T17:30:50.258532'}
+full_title: "Harry Potter and the Sorcerer's Stone (Book 1 Audio CD)"
+isbn_10: ['0807286001']
+isbn_13: ['9780807286005']
+key: "/books/OL26820966M"
+last_modified: {type: '/type/datetime', value: '2020-04-12T15:33:36.871672'}
+latest_revision: 8
+physical_format: "Audio CD"
+publish_date: "Sep 29, 1999"
+publishers: ['Listening Library (Lib)']
+revision: 8
+source_records: ['amazon:0807286001']
+title: "Harry Potter and the Sorcerer's Stone"
+type: {key: '/type/edition'}
+works: [{…}]
+[[Prototype]]: Object
+info_url: "https://openlibrary.org/books/OL26820966M/Harry_Potter_and_the_Sorcerer's_Stone"
+preview: "noview"
+preview_url: "https://openlibrary.org/books/OL26820966M/Harry_Potter_and_the_Sorcerer's_Stone"
+thumbnail_url: "https://covers.openlibrary.org/b/id/8483863-S.jpg"
+
+
+
+allReviews.ts
+
+// import React, { useEffect, useState } from "react";
+// import ReviewList from "./ReviewList";
+
+// import reviewInterface from "../models/reviewInterface";
+
+// import { fetchAllReviews } from "../services/bookReviewAPIservice";
+
+// export default function AllReviewsRoute() {
+//   const [reviews, setReviews] = useState<reviewInterface[]>([]);
+//   useEffect(() => {
+//     fetchAllReviews().then((res) => setReviews(res));
+//   }, []);
+
+//   return (
+//     <div>
+//       <ReviewList reviews={reviews} />;
+//     </div>
+//   );
+// }
+

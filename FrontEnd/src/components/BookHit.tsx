@@ -12,6 +12,7 @@ import getBooksResponse from "../services/getBooksResponse";
 import BookDescriptions from "./BookDescriptions";
 import { BookISBNInterface } from "../models/BookISBNInterface";
 import { useParams } from "react-router";
+import "./BookHit.css";
 
 export default function BookHit({
   author_name,
@@ -19,12 +20,14 @@ export default function BookHit({
   title,
   cover_i,
   bookKey,
+  id_amazon,
 }: {
   title: string;
   author_name?: string[] | null;
   isbn?: string[] | null;
   cover_i?: number | null;
   bookKey: string;
+  id_amazon: string;
 }) {
   // const [data, setData] = useState("");
 
@@ -34,11 +37,11 @@ export default function BookHit({
   //     .then((data) => setData(data));
   // }, []);
 
-  const { id_amazon } = useParams<any>();
-
   const id = `https://openlibrary.org${bookKey}`;
 
   const targetISBN = isbn?.[0];
+
+  const amazon = id_amazon[0];
 
   const [descriptions, setDescriptions] = useState<BookISBNInterface>();
 
@@ -52,20 +55,24 @@ export default function BookHit({
 
   console.log("this is the key:", { bookKey });
   return (
-    <div className="book">
+    <div className="BookHit">
       <Link
         className="linkToDescription"
-        to={`/books/details/${targetISBN}${bookKey}/${id_amazon}`}
+        to={`/books/details/${targetISBN}${bookKey}/${amazon}`}
       >
-        <h1>{title}</h1>
+        <img
+          className="covers"
+          src={`https://covers.openlibrary.org/b/id/ ${cover_i} -M.jpg`}
+        />
+
+        {/* <h1>{title}</h1> */}
       </Link>
-      <img src={`https://covers.openlibrary.org/b/id/ ${cover_i} -M.jpg`} />
-      <h2>{author_name}</h2>`
+      {/* <h2>{author_name}</h2>`
       <h3>
         source: <a href={id}>{id}</a>
-      </h3>
-      <p>{targetISBN}</p>
-      <button
+      </h3> */}
+      {/* <p>{targetISBN}</p> */}
+      {/* <button
         onClick={() => {
           for (let i = 0; i < jenny!.docs!.length; i++) {
             if (jenny!.docs![i].id_goodreads) {
@@ -73,11 +80,11 @@ export default function BookHit({
               break;
             }
           }
-          // console.log("this is jenny", jenny?.docs);
+          console.log("this is amazon from book hit", amazon);
         }}
       >
         testing
-      </button>
+      </button> */}
     </div>
   );
 }

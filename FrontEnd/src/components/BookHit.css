@@ -1,0 +1,14 @@
+.BookHit {
+  display: flex;
+  /* flex-direction: row;
+  flex-wrap: wrap; */
+  /* border: 2px solid black; */
+  text-align: center;
+  height: 300px;
+  width: 300px;
+  margin-bottom: 50px;
+}
+
+.covers {
+  max-width: 40vw;
+}
