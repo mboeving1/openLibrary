@@ -1,24 +1,19 @@
 import reviewInterface from "../models/reviewInterface";
+import "./ReviewList.css";
 
 interface Props {
-  reviews: reviewInterface[];
+  reviews: reviewInterface;
 }
 
 export default function ReviewList({ reviews }: Props) {
   return (
-    <div>
-      <ul>
-        {reviews.map((review, index) => {
-          return (
-            <li key={index}>
-              <p>Id: {review._id}</p>
-              <p>Name:{review.username}</p>
-              <p>Review:{review.review}</p>
-              <p>ISBN: {review.isbn}</p>
-            </li>
-          );
-        })}
-      </ul>
+    <div className="mySlides">
+      <q>{reviews.review}</q>
+      <p className="author">- {reviews.username}</p>
     </div>
+    // <div>
+    //   <p>Name: {reviews.username}</p>
+    //   <p>Review: {reviews.review}</p>
+    // </div>
   );
 }

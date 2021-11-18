@@ -12,7 +12,7 @@ routes.get("/reviews", async (req, res) => {
   try {
     const client = await getClient();
     const results = await client
-      .db()
+      .db("BookDrive")
       .collection<reviewInterface>("BookDrive")
       .find()
       .toArray();
@@ -28,7 +28,7 @@ routes.post("/reviews", async (req, res) => {
   try {
     const client = await getClient();
     await client
-      .db() //we changed this from BookDrive to myFirstDatabase bc that's the parent folder in mongodb
+      .db("BookDrive") //we changed this from BookDrive to myFirstDatabase bc that's the parent folder in mongodb
       .collection<reviewInterface>("BookDrive")
       .insertOne(review);
     res.status(201).json(review);

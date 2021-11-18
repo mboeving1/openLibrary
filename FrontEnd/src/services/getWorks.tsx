@@ -1,4 +1,5 @@
 import axios from "axios";
+import { CreatedOrLastModified } from "../models/WorkDetails";
 import WorkAPI from "../models/WorkDetails";
 
 export default function getWorksAPI(key: string): Promise<WorkAPI> {
