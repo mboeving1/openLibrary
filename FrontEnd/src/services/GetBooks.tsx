@@ -11,7 +11,7 @@ export default function getBooks(
   // id_amazon: string
 ): Promise<BookDetailInterface> {
   return axios
-    .get("http://openlibrary.org/search.json?", {
+    .get("https://openlibrary.org/search.json?", {
       params: {
         q: searchQuery, //this the parameter of getBooks() - adds onto the url so that it can retrieve the specific search
       },

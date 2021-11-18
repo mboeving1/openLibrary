@@ -19,6 +19,7 @@ export interface BookDetailInterface {
   num_found: number;
   q: string;
   offset?: null;
+  author_name?: string[] | null;
 }
 export interface DocsEntity {
   key: string;

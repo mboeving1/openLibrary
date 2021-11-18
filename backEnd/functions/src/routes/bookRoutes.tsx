@@ -12,7 +12,7 @@ routes.get("/reviews", async (req, res) => {
   try {
     const client = await getClient();
     const results = await client
-      .db("BookDrive")
+      .db()
       .collection<reviewInterface>("BookDrive")
       .find()
       .toArray();
@@ -20,6 +20,21 @@ routes.get("/reviews", async (req, res) => {
   } catch (err) {
     console.error("FAIL", err);
     res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+routes.post("/reviews", async (req, res) => {
+  const review = req.body as reviewInterface;
+  try {
+    const client = await getClient();
+    await client
+      .db() //we changed this from BookDrive to myFirstDatabase bc that's the parent folder in mongodb
+      .collection<reviewInterface>("BookDrive")
+      .insertOne(review);
+    res.status(201).json(review);
+  } catch (err) {
+    console.error("ERROR", err);
+    res.status(500).json({ message: "Internal Service Error." });
   }
 });
 

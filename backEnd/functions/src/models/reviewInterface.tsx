@@ -4,7 +4,8 @@ import { ObjectId } from "mongodb";
 
 export default interface reviewInterface {
   _id?: ObjectId;
-  name: string;
+  username: string;
   review: string;
+  isbn: string;
   // rating: number;
 }

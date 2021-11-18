@@ -48,3 +48,13 @@ allReviews.ts
 //   );
 // }
 
+
+
+to do:
+- home reload page
+- descriptions css
+- amazon button
+- go back from descriptions
+- see reviews button
+- style review form 
+- the issue of not all of them having a description

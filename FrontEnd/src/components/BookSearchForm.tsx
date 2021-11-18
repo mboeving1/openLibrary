@@ -24,8 +24,11 @@ export default function BookSearchForm({
       >
         <label>Search</label>
         <input
-          className="BookSearchForm"
+          className="searchInput"
           type="text"
+          style={{
+            fontSize: "2vw",
+          }}
           value={bookQuery}
           onChange={(e) => {
             //changes from empty string to the target value
@@ -47,7 +50,7 @@ export default function BookSearchForm({
             <option value="subject">Subject</option>
           </select>
         </label> */}
-        {console.log("this is amazon", amazon)};
+        {console.log("this is amazon", amazon)}
       </form>
     </div>
   );
