@@ -1,4 +1,3 @@
-
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
@@ -9,7 +8,7 @@
 import * as functions from "firebase-functions";
 import express from "express";
 import cors from "cors";
-import routes from "./routes/bookRoutes"; // rename w/ proper name used in our code
+import routes from "./src/routes/bookRoutes"; // rename w/ proper name used in our code
 
 const app = express();
 app.use(cors());

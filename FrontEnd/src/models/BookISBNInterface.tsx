@@ -15,7 +15,7 @@ export interface ISBN {
   thumbnail_url: string;
   details: Details;
   description: string;
-  authors?: AuthorsEntity[] | null;
+  authors?: AuthorsEntity;
   covers?: number[] | null;
   title: string;
 }
@@ -59,7 +59,6 @@ export interface Details {
   last_modified: CreatedOrLastModified;
 }
 export interface AuthorsEntity {
-  key: string;
   name: string;
 }
 export interface ContributorsEntity {

@@ -47,7 +47,7 @@ export default function BookSearchForm({
             <option value="subject">Subject</option>
           </select>
         </label> */}
-        {console.log("this is amazon", amazon)};
+        {console.log("this is amazon", amazon)}
       </form>
     </div>
   );

@@ -11,7 +11,7 @@ export default function ReviewList({ reviews }: Props) {
         {reviews.map((review, index) => {
           return (
             <li key={index}>
-              <p>Name:{review.name}</p>
+              <p>Name:{review.username}</p>
               <p>Review:{review.review}</p>
             </li>
           );

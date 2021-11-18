@@ -22,6 +22,9 @@ import WorkAPI from "../models/WorkDetails";
 import "./BookDescriptions.css";
 import { render } from "@testing-library/react";
 import { Link, NavLink } from "react-router-dom";
+import AllReviewsRoute from "./allReviews";
+import reviewInterface from "../models/reviewInterface";
+import { addReview } from "../services/bookReviewAPIservice";
 
 export default function BookDescriptions() {
   //   {
@@ -92,8 +95,6 @@ export default function BookDescriptions() {
     });
   }, []);
 
-  const [description, setDescription] = useState<any>();
-
   const [stuff, setStuff] = useState<WorkAPI>();
 
   const moreDetails = useEffect(() => {
@@ -112,51 +113,95 @@ export default function BookDescriptions() {
     setActive(true);
   };
 
+  const [_id, setId] = useState<any>();
+  const [username, setUsername] = useState<any>();
+  const [review, setReview] = useState<any>();
+  const [isbn, setIsbn] = useState<any>();
+
   return (
     <div className="detailsPage">
-      <button
+      {/* <button
         onClick={() => {
           console.log(test);
           console.log("this is the targetISBN", targetISBN);
           console.log(test && test[targetISBN]);
           console.log("this is stuff", stuff);
+          console.log(shopping);
         }}
       >
         {" "}
         test{" "}
-      </button>
-      <h1>{test && test[targetISBN].details.title}</h1>
-      <img src="https://covers.openlibrary.org/b/id/8483863-L.jpg"></img>
-      {/* <h2>{test && test[targetISBN].details.authors[0].name}</h2> */}
-      <div className="descriptionParagraph">
-        {stuff && <p>{stuff.description}</p>}
+      </button> */}
+      <div className="descriptionTitle">
+        <h1>{test && test[targetISBN].details.title}</h1>
+        {/* {stuff && <p>{stuff.authors![0].author}</p>}{" "} */}
+        <h2> {test && test[targetISBN].details.authors[0].name} </h2>
       </div>
-      <h1>{amazon}</h1>
-      {/* <h2>{shopping?.docs.id_amazon}</h2> */}
-      <img
-      // src={`https://covers.openlibrary.org/b/id/ ${details?.covers} -L.jpg`}
-      />
-      {/* <p>ISBN: {targetISBN}</p> */}
-      <button onClick={ToggleClass}>Leave a Review!</button>
+      <div className="coverDiv">
+        <img
+          className="coverImg"
+          src={`https://covers.openlibrary.org/b/id/${
+            test && test[targetISBN].details.covers[0]
+          }-L.jpg`}
+        ></img>
+      </div>
+      {/* <h2>{test && test[targetISBN].details.authors[0].name}</h2> */}
+      <div className="floatContainer">
+        <div className="descriptionParagraph">
+          {stuff && <p>{stuff.description}</p>}
+        </div>
+
+        {/* <h1>{amazon}</h1> */}
+        {/* <h2>{shopping?.docs.id_amazon}</h2> */}
+        <img
+        // src={`https://covers.openlibrary.org/b/id/ ${details?.covers} -L.jpg`}
+        />
+        {/* <p>ISBN: {targetISBN}</p> */}
+        <Link
+          to={{
+            pathname: `https://www.amazon.com/Harry-Potter-Sorcerers-Stone-Book/dp/${amazon}/ref=sr_1_2?keywords=${amazon}&qid=1637111936&qsid=146-0603343-4241928&sr=8-2&sres=${amazon}&srpt=ABIS_BOOK`,
+          }}
+          target="_blank"
+        >
+          {/* <h1>this is the amazon link</h1> */}
+          <button className="amazonButton"></button>
+        </Link>
+        <button className="reviewButton" onClick={ToggleClass}>
+          Leave a Review!
+        </button>
+      </div>
       <div className={active ? "true" : "false"}>
-        <form className="reviewForm">
+        <form
+          className="reviewForm"
+          method="POST"
+          action=" /may2021lab1/us-central1/api/reviews"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setIsbn(targetISBN);
+            let newReview: reviewInterface = { _id, username, review, isbn };
+            addReview(newReview);
+            console.log("this is the new review", newReview);
+          }}
+        >
           <h3>Leave a Review </h3>
           <label>Name:</label>
-          <input type="text"></input>
+          <input
+            type="text"
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          ></input>
           <br />
-          <textarea></textarea>
+          <textarea
+            style={{ width: "100px" }}
+            onChange={(e) => {
+              setReview(e.target.value);
+            }}
+          ></textarea>
           <button type="submit">submit</button>
         </form>
       </div>
-      );
-      <Link
-        to={{
-          pathname: `https://www.amazon.com/Harry-Potter-Sorcerers-Stone-Book/dp/${amazon}/ref=sr_1_2?keywords=${amazon}&qid=1637111936&qsid=146-0603343-4241928&sr=8-2&sres=${amazon}&srpt=ABIS_BOOK`,
-        }}
-        target="_blank"
-      >
-        <h1>this is the amazon link</h1>
-      </Link>
+
       {/* <button onClick={() => {
         <a = {`https://www.amazon.com/s?k=${amazon}&ref=nb_sb_noss`}
       }} */}
