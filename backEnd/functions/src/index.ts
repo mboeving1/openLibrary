@@ -5,10 +5,11 @@
 //   functions.logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+
 import * as functions from "firebase-functions";
 import express from "express";
 import cors from "cors";
-import routes from "./src/routes/bookRoutes"; // rename w/ proper name used in our code
+import routes from "./routes/bookRoutes";
 
 const app = express();
 app.use(cors());

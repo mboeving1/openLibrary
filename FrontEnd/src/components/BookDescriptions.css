@@ -1,55 +1,157 @@
-.descriptionTitle {
-  text-align: center;
-}
-
-.coverDiv {
-  float: left;
-  width: 50%;
-  justify-content: center;
-}
-
-img.coverImg {
-  margin-right: 50%;
-}
-
-.floatContainer {
+.detailsPage {
   display: flex;
+  /* position: relative; */
   flex-direction: column;
-  float: right;
-  width: 50%;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
 }
 
+/* .descriptionTitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.authorDiv {
+  position: absolute;
+  top: 20;
+  left: 5;
+  right: 5;
+  bottom: 0;
+  margin: auto;
+}
+
+.coverDiv {
+  position: absolute;
+  top: 100px;
+  left: 300px;
+}
+
 .descriptionParagraph {
-  float: right;
-  width: 400px;
-  margin-top: -20px;
-  flex-wrap: wrap;
+  position: absolute;
+}
+*/
+.bigContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .false {
   display: none;
 }
 
-/* button stuff from amazon */
-.amazonButton {
-  background-image: url("../images/256x256.png");
-  background-repeat: no-repeat;
-  background-color: black;
-  width: 300px;
-  height: 70px;
-  border: 1 solid black;
-  border-radius: 8px;
-  background-size: 100%; /* To fill the dimensions of container (button), or */
-  background-size: 40px auto;
-  margin-top: 20px;
-}
-
-.reviewButton {
-  margin-top: 20px;
-}
-
-.reviewFormDiv {
+.reviewForm {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .detailsPage {
+    display: block;
+  }
+
+  .descriptionTitle {
+    text-align: center;
+  }
+
+  .authorDiv {
+    text-align: center;
+  }
+
+  .bigContainer {
+    display: flex;
+    flex-direction: row;
+  }
+  .coverDiv {
+    flex: 1;
+    width: 40vw;
+    position: relative;
+    max-width: 50%;
+
+    /* justify-content: center; */
+    /* overflow: hidden; */
+  }
+
+  img.coverImg {
+    /* position: absolute;
+    right: 0; */
+    /* width: 40vw; */
+    /* flex: 1; */
+    justify-content: center;
+    align-items: center;
+    margin: 4em;
+  }
+
+  .floatContainer {
+    flex: 2;
+    max-width: 50%;
+    flex-direction: column;
+    /* float: right; */
+    /* width: 50%; */
+    justify-content: space-evenly;
+    align-items: center;
+    /* overflow: hidden; */
+  }
+
+  .descriptionParagraph {
+    float: right;
+    width: 50vw;
+    max-width: fit-content;
+    margin-top: -20px;
+    flex-wrap: wrap;
+    margin-right: 2em;
+    padding-left: 2em;
+  }
+
+  .false {
+    display: none;
+  }
+
+  /* button stuff from amazon */
+  .amazonButton {
+    background-image: url("../images/512x512.png");
+    background-repeat: no-repeat;
+    background-color: black;
+    /* width: 300px; */
+    width: 30vw;
+    margin: 6em;
+    height: 70px;
+    border: 1 solid black;
+    border-radius: 8px;
+    /* background-size: 100%; To fill the dimensions of container (button), or */
+    background-size: 100px auto;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -10em;
+  }
+
+  .reviewButton {
+    margin-top: 20px;
+    width: 20vw;
+    justify-content: center;
+    align-items: center;
+    margin-left: 9em;
+  }
+
+  .reviewForm {
+    display: flex;
+    width: 40vw;
+    height: 70vh;
+    border: 2px solid grey;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+  }
+
+  textarea {
+    margin-top: 10em;
+  }
 }

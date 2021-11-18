@@ -24,8 +24,11 @@ export default function BookSearchForm({
       >
         <label>Search</label>
         <input
-          className="BookSearchForm"
+          className="searchInput"
           type="text"
+          style={{
+            fontSize: "2vw",
+          }}
           value={bookQuery}
           onChange={(e) => {
             //changes from empty string to the target value
