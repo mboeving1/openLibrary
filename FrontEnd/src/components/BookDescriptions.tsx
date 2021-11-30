@@ -20,12 +20,14 @@ import getBooks from "../services/GetBooks";
 import getWorksAPI from "../services/getWorks";
 import WorkAPI from "../models/WorkDetails";
 import "./BookDescriptions.css";
+import "./ReviewList.css";
+
 import { render } from "@testing-library/react";
 import { Link, NavLink } from "react-router-dom";
-import AllReviewsRoute from "./allReviews";
 import reviewInterface from "../models/reviewInterface";
 import { addReview, fetchAllReviews } from "../services/bookReviewAPIservice";
 import ReviewList from "./ReviewList";
+import { CreatedOrLastModified } from "../models/WorkDetails";
 
 export default function BookDescriptions() {
   //   {
@@ -87,6 +89,7 @@ export default function BookDescriptions() {
   const fetchedDetails = useEffect(() => {
     getBooksResponse(targetISBN).then((data) => {
       setTest(data);
+      console.log("this is test", test);
       setDescriptions(data.details);
     });
     getBooks(bookKey).then((data) => {
@@ -97,10 +100,11 @@ export default function BookDescriptions() {
   }, []);
 
   const [stuff, setStuff] = useState<WorkAPI>();
+  // const [otherStuff, setOtherStuff] = useState<CreatedOrLastModified>();
 
   const moreDetails = useEffect(() => {
     getWorksAPI(bookKey).then((data) => {
-      console.log("workAPI data", data.description);
+      console.log("%cworkAPI data", "background-color: red", data.description);
       console.log("this is bookKey", bookKey);
       setStuff(data);
     });
@@ -117,9 +121,13 @@ export default function BookDescriptions() {
   const [_id, setId] = useState<any>();
   const [username, setUsername] = useState<any>();
   const [review, setReview] = useState<any>();
-  const [isbn, setIsbn] = useState<any>();
+  const [isbn, setIsbn] = useState<string>(targetISBN);
 
-  fetchAllReviews();
+  const [allReviews, setAllReviews] = useState<reviewInterface[]>([]);
+
+  useEffect(() => {
+    fetchAllReviews().then((res) => setAllReviews(res));
+  }, []);
 
   return (
     <div className="detailsPage">
@@ -136,12 +144,19 @@ export default function BookDescriptions() {
         test{" "}
       </button> */}
       <div className="descriptionTitle">
-        <h1>{test && test[targetISBN].details.title}</h1>
+        {test && test[targetISBN]?.details?.title && (
+          <h1>{test[targetISBN].details.title}</h1>
+        )}
+        {/* <h1>{test && test[targetISBN].details.title}</h1> */}
 
         {/* {stuff && <p>{stuff.authors![0].author}</p>}{" "} */}
       </div>
       <div className="authorDiv">
-        <h2> {test && test[targetISBN].details.authors[0].name} </h2>
+        {/* {test && test[targetISBN]?.details?.authors[0].name && (
+          <h2>{test[targetISBN].details.author[0].name}</h2>
+        )} */}
+        {test && test[targetISBN]?.details?.authors[0].name}
+        {/* <h2> {test && test[targetISBN]?.details?.authors[0].name} </h2> */}
       </div>
       <div className="bigContainer">
         <div className="coverDiv">
@@ -155,7 +170,13 @@ export default function BookDescriptions() {
         {/* <h2>{test && test[targetISBN].details.authors[0].name}</h2> */}
         <div className="floatContainer">
           <div className="descriptionParagraph">
-            {stuff && <p>{stuff.description}</p>}
+            {/* {stuff && stuff.description} */}
+            {stuff?.description && typeof stuff?.description == "object" && (
+              <p>{stuff.description.value}</p>
+            )}
+            {stuff?.description && typeof stuff?.description == "string" && (
+              <p>{stuff.description}</p>
+            )}
           </div>
 
           {/* <h1>{amazon}</h1> */}
@@ -188,11 +209,12 @@ export default function BookDescriptions() {
             setIsbn(targetISBN);
             let newReview: reviewInterface = { _id, username, review, isbn };
             console.log("new isbn", targetISBN);
-            addReview(newReview);
-            console.log("this is the new review", newReview);
+            addReview(newReview).then((res) => allReviews.push(res));
+
+            fetchAllReviews().then((res) => setAllReviews(res));
           }}
         >
-          <h3>Leave a Review </h3>
+          <h3>Share Your Thoughts </h3>
           <label style={{ marginBottom: "1em" }}>Name:</label>
           <input
             type="text"
@@ -203,7 +225,7 @@ export default function BookDescriptions() {
           ></input>
           <br />
           <label className="reviewTag" style={{ marginTop: "1em" }}>
-            Review:
+            <pre> Review: </pre>
           </label>
 
           <textarea
@@ -229,6 +251,16 @@ export default function BookDescriptions() {
           </button>
         </form>
       </div>
+      <div className="reviewsOnPage">
+        {allReviews.map((thought, index) => {
+          if (thought.isbn == targetISBN) {
+            return <ReviewList reviews={thought} />;
+          }
+        })}
+      </div>
+
+      {/* <ReviewList reviews={newReview} /> */}
+
       {/* <ReviewList /> */}
 
       {/* <button onClick={() => {

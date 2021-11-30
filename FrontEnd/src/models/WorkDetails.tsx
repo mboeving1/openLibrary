@@ -1,5 +1,5 @@
 export default interface WorkAPI {
-  description: string;
+  description: string | CreatedOrLastModified;
   title: string;
   covers?: number[] | null;
   subject_places?: string[] | null;
@@ -14,6 +14,7 @@ export default interface WorkAPI {
   created: CreatedOrLastModified;
   last_modified: CreatedOrLastModified;
 }
+
 export interface AuthorsEntity {
   author: AuthorOrType;
   type: AuthorOrType;
